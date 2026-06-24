@@ -18,7 +18,7 @@ app.use(express.json({ limit: '1mb' }));
 // which keeps express-rate-limit's IP fallback accurate).
 app.set('trust proxy', 1);
 
-// Liveness probe — unauthenticated, not rate limited.
+app.get('/', (req, res) => res.redirect('/health'));
 app.get('/health', (req, res) => res.json({ status: 'ok', uptime: process.uptime() }));
 
 // Feature routes.
